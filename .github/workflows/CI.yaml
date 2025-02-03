@@ -1,4 +1,4 @@
-name: Run Tests
+name: Test and Publish
 
 on:
   push:
@@ -19,13 +19,36 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '20' # ✅ Use a modern Node.js version
 
     - name: Set up environment variables
       run: echo "POLYGON_RPC=${{ secrets.POLYGON_RPC }}" >> $GITHUB_ENV
 
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --frozen-lockfile # ✅ Ensures dependency consistency
 
     - name: Run tests
       run: yarn test
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        registry-url: 'https://registry.npmjs.org/'
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    - name: Publish to npm
+      run: yarn publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

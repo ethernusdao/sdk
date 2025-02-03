@@ -2,23 +2,20 @@
   "name": "sdk",
   "version": "1.0.0",
   "description": "SDK to build on top of EthernusDAO",
-  "main": "index.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "repository": "https://github.com/ethernusdao/sdk.git",
   "author": "Rodrigo Burgos <rodrigoburgos@live.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "tsc",
-    "test": "jest",
-    "typechain": "typechain --target ethers-v6 --outDir typechain",
-    "prepublishOnly": "npm run build && npm run typechain"
+    "test": "jest"
   },
   "dependencies": {
     "@typechain/ethers-v6": "^0.5.1",
     "dotenv": "^16.4.7",
     "ethers": "^6.13.5",
     "ts-node": "^10.9.2",
-    "tsc": "^2.0.4",
     "typechain": "^8.3.2",
     "typescript": "^5.7.3"
   },
@@ -28,5 +25,18 @@
     "@types/mocha": "^10.0.10",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5"
-  }
+  },
+  "files": [
+    "src",
+    "typechain"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "ethers",
+    "sdk",
+    "blockchain",
+    "EthernusDAO"
+  ]
 }
