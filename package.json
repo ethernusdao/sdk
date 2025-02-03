@@ -1,5 +1,5 @@
 {
-  "name": "sdk",
+  "name": "@ethernusdao/sdk",
   "version": "1.0.0",
   "description": "SDK to build on top of EthernusDAO",
   "main": "src/index.ts",
